@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+
+      <ion-back-button
+        defaultHref="/main/dashboard"
+      ></ion-back-button>
+
+    </ion-buttons>
+    <ion-title>Daily Report 📊</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- STEP 1: SELECT GROW -->
+  <div *ngIf="step === 1">
+
+    <h2>Select Grow</h2>
+
+    <ion-list>
+      <ion-radio-group [(ngModel)]="selectedGrowId">
+        <ion-list>
+          <ion-item *ngFor="let g of growService.grows()">
+            <ion-label>{{ g.name }}</ion-label>
+            <ion-radio slot="end" [value]="g.id"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-button expand="block" (click)="next()" [disabled]="!selectedGrowId">
+      Next
+    </ion-button>
+
+  </div>
+
+  <!-- STEP 2: SELECT PLANT -->
+  <div *ngIf="step === 2">
+
+    <h2>Select Plant</h2>
+
+    <ion-list>
+      <ion-radio-group [(ngModel)]="selectedPlantId">
+        <ion-list>
+          <ion-item *ngFor="let p of filteredPlants()">
+            <ion-label>{{ p.name }}</ion-label>
+            <ion-radio slot="end" [value]="p.id"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-button expand="block" (click)="back()">Back</ion-button>
+    <ion-button expand="block" (click)="next()" [disabled]="!selectedPlantId">
+      Next
+    </ion-button>
+
+  </div>
+
+  <!-- STEP 3: FORM -->
+  <div *ngIf="step === 3">
+
+    <h2>Report Data</h2>
+
+    <ion-item>
+      <ion-label position="stacked">Height (cm)</ion-label>
+      <ion-input type="number" [(ngModel)]="height"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Notes</ion-label>
+      <ion-textarea [(ngModel)]="notes"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" (click)="back()">Back</ion-button>
+
+    <ion-button expand="block" color="success" (click)="save()">
+      Save Report
+    </ion-button>
+
+  </div>
+
+</ion-content>

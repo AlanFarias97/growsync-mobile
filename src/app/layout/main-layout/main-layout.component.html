@@ -1,0 +1,65 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+
+    <!-- MENU -->
+    <ion-menu contentId="main-content">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Grow Sync</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list>
+
+          <ion-item routerLink="/main/dashboard" routerDirection="root">
+            🌱 Dashboard
+          </ion-item>
+
+          <ion-item routerLink="/grows" routerDirection="root">
+            🌿 Grows
+          </ion-item>
+
+          <ion-item routerLink="/plants" routerDirection="root">
+            🌱 Plants
+          </ion-item>
+
+          <ion-item routerLink="/reports" routerDirection="root">
+            📊 Daily Reports
+          </ion-item>
+
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <!-- CONTENIDO -->
+    <div id="main-content">
+
+      <ion-header>
+        <ion-toolbar>
+
+          <ion-title>
+            Grow Sync Panel
+          </ion-title>
+
+          <ion-buttons slot="end">
+            <ion-label style="margin-right: 10px;">
+              {{ userEmail }}
+            </ion-label>
+
+            <ion-button color="danger" (click)="logout()">
+              Logout
+            </ion-button>
+          </ion-buttons>
+
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-router-outlet></ion-router-outlet>
+      </ion-content>
+
+    </div>
+
+  </ion-split-pane>
+</ion-app>

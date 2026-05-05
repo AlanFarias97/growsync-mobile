@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+
+      <ion-back-button
+        defaultHref="/plants"
+      ></ion-back-button>
+
+    </ion-buttons>
+
+    <ion-title>
+      Plant Detail 🌱
+    </ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+<ion-content class="ion-padding">
+
+  <h2>{{ plant?.name }}</h2>
+  <p>Stage: {{ plant?.stage }}</p>
+  <p>Grow ID: {{ plant?.growId }}</p>
+
+  <ion-button routerLink="/reports">
+    + Add Daily Report
+  </ion-button>
+
+  <h3>Reports</h3>
+
+  <ion-list>
+    <ion-item *ngFor="let r of reports()">
+      <ion-label>
+        <h2>{{ r.reportDate }}</h2>
+        <p>{{ r.notes }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Grows 🌿</ion-title>
+
+    <ion-buttons slot="start">
+
+      <ion-back-button
+        defaultHref="/main/dashboard"
+      ></ion-back-button>
+
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="open()">
+        + Grow
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- GROWS -->
+  <ion-card *ngFor="let g of growService.grows()">
+
+    <ion-card-header>
+
+      <ion-card-title>
+        {{ g.name }}
+      </ion-card-title>
+
+      <ion-card-subtitle>
+        {{ g.medium }}
+      </ion-card-subtitle>
+
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p>
+        {{ g.description }}
+      </p>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <!-- CREATE FORM -->
+  <ion-card *ngIf="showForm">
+
+    <ion-card-header>
+      <ion-card-title>
+        Create Grow
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <!-- NAME -->
+      <ion-item>
+
+        <ion-label position="stacked">
+          Name
+        </ion-label>
+
+        <ion-input
+          [(ngModel)]="newGrow.name"
+        ></ion-input>
+
+      </ion-item>
+
+      <!-- MEDIUM -->
+      <ion-item>
+
+        <ion-label position="stacked">
+          Medium
+        </ion-label>
+
+        <ion-select
+          [(ngModel)]="newGrow.medium"
+        >
+
+          <ion-select-option value="SOIL">
+            Soil
+          </ion-select-option>
+
+          <ion-select-option value="HYDRO">
+            Hydro
+          </ion-select-option>
+
+          <ion-select-option value="COCO">
+            Coco
+          </ion-select-option>
+
+        </ion-select>
+
+      </ion-item>
+
+      <!-- DESCRIPTION -->
+      <ion-item>
+
+        <ion-label position="stacked">
+          Description
+        </ion-label>
+
+        <ion-textarea
+          [(ngModel)]="newGrow.description"
+        ></ion-textarea>
+
+      </ion-item>
+
+      <!-- ACTIONS -->
+      <ion-button
+        expand="block"
+        (click)="add()"
+      >
+        Save
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        (click)="close()"
+      >
+        Cancel
+      </ion-button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

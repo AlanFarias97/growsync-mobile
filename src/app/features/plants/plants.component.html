@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Plants 🌱</ion-title>
+
+    <ion-buttons slot="start">
+
+      <ion-back-button
+        defaultHref="/main/dashboard"
+      ></ion-back-button>
+
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="open()">
+        + Plant
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- FILTER -->
+  <ion-item>
+
+    <ion-label>
+      Filter by Grow
+    </ion-label>
+
+    <ion-select [(ngModel)]="selectedGrowId">
+
+      <ion-select-option [value]="null">
+        All
+      </ion-select-option>
+
+      <ion-select-option
+        *ngFor="let g of growService.grows()"
+        [value]="g.id"
+      >
+        {{ g.name }}
+      </ion-select-option>
+
+    </ion-select>
+
+  </ion-item>
+
+  <!-- LIST -->
+  <ion-list>
+
+    <ion-item
+      *ngFor="let p of filteredPlants()"
+      [routerLink]="['/plants', p.id]"
+    >
+
+      <ion-label>
+        <h2>{{ p.name }}</h2>
+        <p>{{ p.stage }}</p>
+      </ion-label>
+
+    </ion-item>
+
+  </ion-list>
+
+  <!-- FORM -->
+  <ion-card *ngIf="showForm">
+
+    <ion-card-header>
+      <ion-card-title>
+        Create Plant
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <!-- NAME -->
+      <ion-item>
+
+        <ion-label position="stacked">
+          Name
+        </ion-label>
+
+        <ion-input
+          [(ngModel)]="newPlant.name"
+        ></ion-input>
+
+      </ion-item>
+
+<!-- GROW -->
+<ion-item>
+
+  <ion-label position="stacked">
+    Grow
+  </ion-label>
+
+  <ion-select
+    [(ngModel)]="newPlant.growId"
+  >
+
+    <ion-select-option
+      *ngFor="let g of growService.grows()"
+      [value]="g.id"
+    >
+      {{ g.name }}
+    </ion-select-option>
+
+  </ion-select>
+
+</ion-item>
+
+      <!-- STAGE -->
+      <ion-item>
+
+        <ion-label position="stacked">
+          Stage
+        </ion-label>
+
+        <ion-select
+          [(ngModel)]="newPlant.stage"
+        >
+
+          <ion-select-option value="VEGETATIVE">
+            Veg
+          </ion-select-option>
+
+          <ion-select-option value="FLOWERING">
+            Flower
+          </ion-select-option>
+
+        </ion-select>
+
+      </ion-item>
+
+      <!-- ACTIONS -->
+      <ion-button
+        expand="block"
+        (click)="add()"
+      >
+        Save
+      </ion-button>
+
+      <ion-button
+        expand="block"
+        fill="clear"
+        (click)="close()"
+      >
+        Cancel
+      </ion-button>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>
